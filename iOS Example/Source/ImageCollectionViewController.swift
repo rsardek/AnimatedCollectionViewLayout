@@ -77,7 +77,20 @@ class ImageCollectionViewController: UICollectionViewController {
         
         dismissGesture.direction = direction == .horizontal ? .down : .left
     }
-
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if size.width > size.height {
+            if let layout = collectionView?.collectionViewLayout as? AnimatedCollectionViewLayout {
+                layout.scrollDirection = .vertical
+            }
+        }
+        else {
+            if let layout = collectionView?.collectionViewLayout as? AnimatedCollectionViewLayout {
+                layout.scrollDirection = .horizontal
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
